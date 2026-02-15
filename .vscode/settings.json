@@ -1,0 +1,9 @@
+{
+  "python.defaultInterpreterPath": ".venv/bin/python",
+  "python.terminal.activateEnvironment": true,
+  "python.analysis.autoImportCompletions": true,
+
+  "python.linting.enabled": false,
+  "ruff.enable": true,
+  "editor.formatOnSave": true
+}

@@ -1,0 +1,38 @@
+[project]
+name = "bsmodel"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [{ name = "Vojta Bartos", email = "bartos.v@icloud.com" }]
+requires-python = ">=3.14"
+dependencies = ["ipykernel>=7.2.0", "scipy>=1.17.0"]
+
+[build-system]
+requires = ["uv_build>=0.9.8,<0.10.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = ["pytest>=9.0.2", "pytest-cov>=7.0.0", "ruff>=0.15.1"]
+
+[tool.ruff]
+# Allow lines to be as long as 120.
+line-length = 120
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+markers = [
+    "unit: marks tests as unit tests",
+    "slow: marks tests as slow",
+    "integration: integration tests",
+    "e2e: end-to-end tests",
+]
+testpaths = ["tests"] #, "integration_tests"
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = """
+-ra
+--cov=src
+--cov-report=term-missing
+--cov-fail-under=90
+"""
