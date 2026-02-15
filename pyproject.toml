@@ -4,15 +4,15 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 authors = [{ name = "Vojta Bartos", email = "bartos.v@icloud.com" }]
-requires-python = ">=3.14"
-dependencies = ["ipykernel>=7.2.0", "scipy>=1.17.0"]
+requires-python = ">=3.11"
+dependencies = ["scipy>=1.17.0"]
 
 [build-system]
 requires = ["uv_build>=0.9.8,<0.10.0"]
 build-backend = "uv_build"
 
 [dependency-groups]
-dev = ["pytest>=9.0.2", "pytest-cov>=7.0.0", "ruff>=0.15.1"]
+dev = ["pytest>=9.0.2", "pytest-cov>=7.0.0", "ruff>=0.15.1", "ipykernel>=7.2.0"]
 
 [tool.ruff]
 # Allow lines to be as long as 120.
