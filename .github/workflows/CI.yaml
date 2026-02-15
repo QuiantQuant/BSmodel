@@ -2,6 +2,8 @@ name: Continuous Integration
 
 on:
   push:
+    branches: ["**"]
+  pull_request:
     branches: ["main"]
 
 jobs:
@@ -18,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: "Set up Python"
+      - name: Set up Python
         uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
@@ -31,3 +33,11 @@ jobs:
 
       - name: Run tests
         run: uv run pytest tests
+
+      - name: Run linting
+        run: |
+          uv run ruff check .
+          uv run ruff format --check .
+
+      - name: Type checking
+        run: uv run mypy src/
