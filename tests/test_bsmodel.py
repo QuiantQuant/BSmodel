@@ -4,6 +4,7 @@ from math import log, sqrt
 
 from bsmodel.models import BSModel
 
+
 @pytest.mark.parametrize(
     "inputs, px, delta, gamma, vega, theta, rho",
     [
