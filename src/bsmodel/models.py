@@ -32,32 +32,34 @@ class BSModel:
         )
         self.d2: float = self.d1 - self.vol * sqrt(self.tte)
 
-    def price(self, option_type:str = "call") -> float:
+    def price(self, option_type: str = "call") -> float:
         if option_type == "call":
             return self.spt * exp(-self.dvd * self.tte) * norm.cdf(self.d1) - self.stk * exp(
                 -self.rfr * self.tte
-                ) * norm.cdf(self.d2)
-        else: # Put
+            ) * norm.cdf(self.d2)
+        else:  # Put
             return self.stk * exp(-self.rfr * self.tte) * norm.cdf(-self.d2) - self.spt * exp(
                 -self.dvd * self.tte
             ) * norm.cdf(-self.d1)
 
-    def delta(self, option_type:str = "call") -> float:
+    def delta(self, option_type: str = "call") -> float:
         return exp(-self.dvd * self.tte) * norm.cdf(self.d1)
 
-    def gamma(self, option_type:str = "call") -> float:
+    def gamma(self, option_type: str = "call") -> float:
         return exp(-self.dvd * self.tte) * norm.pdf(self.d1) / (self.spt * self.vol * sqrt(self.tte))
 
-    def vega(self, option_type:str = "call") -> float:
+    def vega(self, option_type: str = "call") -> float:
         return self.spt * exp(-self.dvd * self.tte) * norm.pdf(self.d1) * sqrt(self.tte) / 100
 
-    def theta(self, option_type:str = "call") -> float:
+    def theta(self, option_type: str = "call") -> float:
         if self.tte <= 0:
             return 0.0
 
-        return (-(self.spt * exp(-self.dvd*self.tte) * norm.pdf(self.d1) * self.vol) / (2 * sqrt(self.tte))
-         - self.rfr * self.stk * exp(-self.rfr*self.tte) * norm.cdf(self.d2)
-         + self.dvd * self.spt * exp(-self.dvd*self.tte) * norm.cdf(self.d1)) / 365
+        return (
+            -(self.spt * exp(-self.dvd * self.tte) * norm.pdf(self.d1) * self.vol) / (2 * sqrt(self.tte))
+            - self.rfr * self.stk * exp(-self.rfr * self.tte) * norm.cdf(self.d2)
+            + self.dvd * self.spt * exp(-self.dvd * self.tte) * norm.cdf(self.d1)
+        ) / 365
 
-    def rho(self, option_type:str = "call") -> float:
+    def rho(self, option_type: str = "call") -> float:
         return self.stk * self.tte * exp(-self.rfr * self.tte) * norm.cdf(self.d2) / 100
